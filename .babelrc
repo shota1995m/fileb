@@ -1,0 +1,23 @@
+{
+  "plugins": [
+    [
+      "babel-plugin-root-import",
+      {
+        "paths": [
+          {
+            "rootPathSuffix": "./src",
+            "rootPathPrefix": "~/"
+          },
+          {
+            "rootPathSuffix": "./src/react",
+            "rootPathPrefix": "%/"
+          },
+          {
+            "rootPathSuffix": "./src/style",
+            "rootPathPrefix": "style/"
+          },
+        ]
+      }
+    ]
+  ]
+}
