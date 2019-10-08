@@ -1,18 +1,38 @@
-import React, { Component } from 'react';
-import {
-  Router,
-  Stack,
-  Scene,
-  Actions
-} from 'react-native-router-flux';
+import React from 'react'
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 
-import NavBar from '../components/Layout/NavBar';
-import Top from '../pages/Top';
-import AddServer from '../pages/AddServer';
+import { NavBar } from '../components/Layout/containers'
+import { Top, AddServer } from '../pages/containers'
+import HeaderRightBtn from '../components/Btn/HeaderRightBtn'
 
-export default Actions.create(
-    <Scene key="root" navBar={NavBar} >
-      <Scene key="top" component={Top} title="File" onRight={() => Actions.add_server()} rightTitle="追加" />
-      <Scene key="add_server" component={AddServer} title="アクセス情報を追加" />
-    </Scene>
+const Root = createStackNavigator(
+  {
+    top: {
+      screen: Top,
+      navigationOptions: ({ navigation }) => {
+        return {
+        title: "トップ",
+        headerRight: <HeaderRightBtn
+        routeName="add_server"
+        text="追加"
+        navigation={navigation} />,
+      }}
+    },
+    add_server: {
+      screen: AddServer,
+      navigationOptions: {
+        title: "サーバー追加"
+      }
+    },
+  },
+  {
+    defaultNavigationOptions: {
+      header: ({ scene, previous, navigation }) => {
+        return <NavBar navigation={navigation} scene={scene} previous={previous} />
+      },
+    }
+  }
 )
+
+export default createAppContainer(Root)
