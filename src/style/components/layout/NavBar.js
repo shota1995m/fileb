@@ -21,9 +21,14 @@ export default {
     fontWeight: 'bold',
   },
   Left: {
+    flex: 1
   },
   Center: {
+    flex: 3,
+    alignItems: 'center'
   },
   Right: {
+    flex: 1,
+    alignItems: 'flex-end'
   }
 }
