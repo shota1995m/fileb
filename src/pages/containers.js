@@ -12,11 +12,11 @@ export const Top = connect(state => {
 
 import _AddServer from './AddServer';
 export const AddServer = connect(state => {
-    return {}
+    return {test: 'ok'}
 }, (dispatch) => {
     return {
       addConnection: (data) => {
-        dispatch(actions.connectionAdd(data))
+        return dispatch(actions.connectionAdd(data))
       }
     }
 })(_AddServer);

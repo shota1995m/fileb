@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 
 import { NavBar } from '../components/Layout/containers'
 import { Top, AddServer } from '../pages/containers'
-import HeaderRightBtn from '../components/Btn/HeaderRightBtn'
+import { HeaderRightBtn } from '../components/Btn/containers'
 
 const Root = createStackNavigator(
   {

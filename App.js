@@ -4,7 +4,7 @@ import IndexRouter from './src/router/IndexRouter';
 
 // redux
 import {createReduxContainer, createReduxBoundAddListener, createReactNavigationReduxMiddleware} from 'react-navigation-redux-helpers';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider, connect} from 'react-redux';
 import reducers from './src/react/reducers';
 

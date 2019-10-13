@@ -12,35 +12,82 @@ export default class AddServer extends Component {
     super(props)
 
     this.state = {
-      name: '',
-      key: '',
-      secret: '',
-      region: '',
+      error: '',
+      val: {
+        name: '',
+        key: '',
+        secret: '',
+        region: '',
+      }
+    }
+
+    this.connectionSave = this.connectionSave.bind(this)
+    this.validation = this.validation.bind(this)
+    this.setVal = this.setVal.bind(this)
+  }
+
+  async validation() {
+    this.setState({error: ""})
+    let keys = [];
+    console.warn(this.state.val)
+    
+    await Object.keys(this.state.val).map((v,k) => {
+      const val = this.state.val[v]
+      console.warn(val)
+      if (val == "") {
+        keys.push(v)
+      }
+    })
+
+    console.warn(keys, keys.length)
+
+    if (keys.length) {
+      this.setState({ error: `${keys.join(',')}が入力されていません`});
+      throw new Error('validation error')
+    }
+
+    return;
+
+  }
+
+  async connectionSave() {
+    try {
+      await this.validation()
+      await this.props.addConnection(this.state.val)
+      this.props.navigation.goBack(null)
+    } catch(err) {
+      console.warn(err)
     }
   }
 
-  connectionSave() {
-    this.props.addConnection(this.state)
+  setVal(k, v) {
+    this.setState({
+      val: {
+        ...this.state.val,
+        [k]: v
+      }
+    })
   }
 
   render() {
     return <View style={ Style.Common.Content }>
       <Text style={Style.Form.Text}>アクセス情報を入力してください</Text>
+        { (this.state.error != "") && <Text>{this.state.error}</Text> }
         <View style={{ marginBottom: 16 }}>
           <Wrap label="表示名">
-            <Input onChangeText={text => this.setState({name: text})} autoFocus={true} />
+            <Input onChangeText={text => this.setVal('name', text)} autoFocus={true} />
           </Wrap>
           <Wrap label="Key">
-            <Input onChangeText={text => this.setState({secret: text})} />
+            <Input onChangeText={text => this.setVal('key', text)} />
           </Wrap>
           <Wrap label="Secret">
-            <Input onChangeText={text => this.setState({secret: text})} />
+            <Input onChangeText={text => this.setVal('secret', text)} />
           </Wrap>
           <Wrap label="Region">
-            <Input onChangeText={text => this.setState({region: text})} />
+            <Input onChangeText={text => this.setVal('region', text)} />
           </Wrap>
         </View>
-        <Btn text="アクセス情報を保存" />
+        <Btn text="アクセス情報を保存" onPress={this.connectionSave} />
       </View>
   }
 }

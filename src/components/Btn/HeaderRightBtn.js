@@ -8,11 +8,7 @@ export default class HeaderRightBtn extends Component {
   }
 
   render() {
-    const pushAction = StackActions.push({
-      routeName: this.props.routeName,
-    });
-
-    return <TouchableOpacity onPress={() => this.props.navigation.dispatch(pushAction)}>
+    return <TouchableOpacity onPress={() => this.props.send(this.props.routeName)}>
         <Text>{ this.props.text }</Text>
       </TouchableOpacity>
   }

@@ -14,14 +14,15 @@ const initialState = {
 
 export default handleActions({
   [ActionTypes.CONNECTION.ADD]: (state, action) => {
+    let stateData = state.data;
     const data = {
       ...template,
-      ...state.payload
+      ...action.payload
     }
-    state.push(data)
+    stateData.push(data)
 
     return {
-      data: state
+      data: stateData
     };
   },
   [ActionTypes.CONNECTION.EDIT]: (state, action) => {
