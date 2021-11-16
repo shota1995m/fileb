@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@react-navigation/core": "^3.5.1",
-    "aws-sdk": "^2.543.0",
+    "aws-sdk": "^2.814.0",
     "expo": "^35.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
